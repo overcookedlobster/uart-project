@@ -28,6 +28,7 @@ graph TD
 ```
 uart_project/
 ├── rtl/
+│   ├── uart_pkg.sv            // Package file for structs/types
 │   ├── uart_top.sv            // Top-level UART module
 │   ├── uart_tx.sv             // Transmitter (parallel-to-serial)
 │   ├── uart_rx.sv             // Receiver (serial-to-parallel)
