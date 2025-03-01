@@ -1,0 +1,1 @@
+-debug "typical" -s "sim_snapshot" "baudrate_gen_tb" 
