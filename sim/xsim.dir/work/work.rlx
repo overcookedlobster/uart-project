@@ -1,6 +1,0 @@
-0.7
-2020.2
-Nov  8 2024
-22:36:55
-/home/workinglobster/uart-project/rtl/baudrate_gen.sv,1740850328,systemVerilog,,/home/workinglobster/uart-project/tb/unit_tests/baudrate_gen_tb.sv,,baudrate_gen,,,,,,,,
-/home/workinglobster/uart-project/tb/unit_tests/baudrate_gen_tb.sv,1740850073,systemVerilog,,,,baudrate_gen_tb,,,,,,,,
