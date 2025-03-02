@@ -1,0 +1,5 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/workinglobster/uart-project/rtl/baudrate_gen.sv" into library work
+WARNING: [VRFC 10-2502] extra semicolon in $unit (global) scope [/home/workinglobster/uart-project/rtl/baudrate_gen.sv:11]
+INFO: [VRFC 10-311] analyzing module baudrate_gen
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/workinglobster/uart-project/tb/unit_tests/baudrate_gen_tb.sv" into library work
+INFO: [VRFC 10-311] analyzing module baudrate_gen_tb

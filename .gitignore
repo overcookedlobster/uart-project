@@ -1,0 +1,7 @@
+*.jou
+*.log
+*.pb
+*.wdb
+*.str
+xsim.dir/
+sim_temp/

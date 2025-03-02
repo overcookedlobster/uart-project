@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Sun Mar  2 01:17:27 2025
+# Process ID         : 54123
+# Current directory  : /home/workinglobster/uart-project/sim/sim_temp
+# Command line       : vivado -mode batch -notrace -source ../run_sim.tcl -tclargs ../rtl/baudrate_gen.sv ../tb/unit_tests/baudrate_gen_tb.sv baudrate_gen_tb 10us ../sim
+# Log file           : /home/workinglobster/uart-project/sim/sim_temp/vivado.log
+# Journal file       : /home/workinglobster/uart-project/sim/sim_temp/vivado.jou
+# Running On         : PG-LAP-273
+# Platform           : Debian
+# Operating System   : Debian GNU/Linux 12 (bookworm)
+# Processor Detail   : 11th Gen Intel(R) Core(TM) i5-1145G7 @ 2.60GHz
+# CPU Frequency      : 1497.600 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 8193 MB
+# Swap memory        : 2147 MB
+# Total Virtual      : 10341 MB
+# Available Virtual  : 8644 MB
+#-----------------------------------------------------------
+source ../run_sim.tcl -notrace
