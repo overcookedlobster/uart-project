@@ -5,3 +5,6 @@
 *.str
 xsim.dir/
 sim_temp/
+
+sim/xsim.dir/
+sim/sim_temp/
