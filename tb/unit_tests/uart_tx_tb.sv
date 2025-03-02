@@ -222,17 +222,38 @@ module uart_tx_tb;
     // test case 2: flow control test (cts deasserted)
     $display("\n[%0t] Test Case 2: Flow Control Test", $time);
     tx_data = 8'hAA; // 10101010
-    cts = 0; // Deassert CTS
     
+    // First make sure we're completely idle
+    @(posedge clk);
+    wait(!tx_busy);  // Wait until the previous transmission is completely done
+    repeat(10) @(posedge clk);  // Additional wait time for stability
+    
+    // Then deassert CTS
+    cts = 0; // Deassert CTS
+    #(CLK_PERIOD * 2);  // Give time for cts to propagate
+    
+    $display("[DEBUG] Before asserting tx_start: cts=%b, tx_busy=%b, tx_start_pending=%b", 
+             cts, tx_busy, dut.tx_start_pending);
+    
+    // Now try to start transmission
     tx_start = 1;
     repeat(5) @(posedge clk);
     tx_start = 0;
+    
+    $display("[DEBUG] After asserting tx_start: cts=%b, tx_busy=%b, tx_start_pending=%b", 
+             cts, tx_busy, dut.tx_start_pending);
+    
+    // Check if tx_start_pending was incorrectly set
+    #(CLK_PERIOD * 2);
+    if (dut.tx_start_pending)
+        $error("[%0t] tx_start_pending was incorrectly set despite CTS being deasserted", $time);
     
     // verify transmission doesn't start
     #(CLK_PERIOD * 20);
     if (tx_busy) $error("[%0t] Transmission started despite CTS being deasserted", $time);
     
     // assert cts to allow transmission
+    $display("[DEBUG] Now asserting CTS to allow transmission");
     cts = 1;
     #(CLK_PERIOD * 2);
     
@@ -363,7 +384,7 @@ module uart_tx_tb;
   
   // Global timeout
   initial begin
-    #(CLK_PERIOD * 100000); // adjusted timeout
+    #(CLK_PERIOD * 1000000); // adjusted timeout
     $display("[%0t] Global simulation timeout - something is wrong!", $time);
     $finish;
   end
