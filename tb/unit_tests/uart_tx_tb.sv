@@ -2,7 +2,9 @@
 Filename: uart_tx_tb.sv
 Description: testbench for the uart transmitter module with enhanced debugging
 */
-
+/*
+xvlog -sv rtl/uart_tx.sv rtl/baudrate_gen.sv tb/unit_tests/uart_tx_tb.sv && xelab -R uart_tx_tb
+*/
 `timescale 1ns/1ps
 
 module uart_tx_tb;
