@@ -59,19 +59,21 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Run the simulation
-echo -e "${YELLOW}Running simulation...${NC}"
-xsim sim_snapshot -R -onfinish quit
+# Generate waveform database file
+echo -e "${YELLOW}Running simulation and creating waveform database...${NC}"
+# Create a timestamp for the waveform file
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+WAVE_FILE="baud_gen_waves_${TIMESTAMP}.wdb"
+
+xsim sim_snapshot -tclbatch <(echo "log_wave -recursive *; run all; write_waveform $WAVE_FILE; exit")
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Simulation completed successfully${NC}"
+    echo -e "${GREEN}Waveform database saved to: $SIM_DIR/$WAVE_FILE${NC}"
     
-    # Create a timestamp for the waveform file
-    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-    
-    # Convert to VCD if needed (optional)
-    echo -e "${YELLOW}Generating VCD file...${NC}"
-    xsim sim_snapshot -tclbatch <(echo "open_vcd baud_gen_waves_${TIMESTAMP}.vcd; log_vcd /*; run all; close_vcd; exit")
+    # Open the waveform viewer
+    echo -e "${YELLOW}Opening waveform viewer...${NC}"
+    xsim -gui sim_snapshot -view $WAVE_FILE &
     
     echo -e "${GREEN}Simulation artifacts saved to: $SIM_DIR${NC}"
 else
