@@ -3,6 +3,7 @@
 *.pb
 *.wdb
 *.str
+*.vcd
 xsim.dir/
 sim_temp/
 
