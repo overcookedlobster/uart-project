@@ -5,8 +5,8 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
 
 # Configuration variables
-DESIGN_FILE="$PROJECT_ROOT/rtl/baudrate_gen.sv"
-TESTBENCH_FILE="$PROJECT_ROOT/tb/unit_tests/baudrate_gen_tb.sv"
+DESIGN_FILE="$PROJECT_ROOT/rtl/uart_tx/baudrate_gen.sv"
+TESTBENCH_FILE="$PROJECT_ROOT/tb/unit_tests/uart_tx/baudrate_gen_tb.sv"
 TB_TOP="baudrate_gen_tb"
 SIM_DIR="$PROJECT_ROOT/sim"
 
@@ -79,3 +79,13 @@ if [ $? -eq 0 ]; then
 else
     echo -e "${RED}Simulation failed${NC}"
 fi
+
+# Wait a moment to ensure the viewer has time to open and load the files
+sleep 2
+
+# NOW clean all generated files - MOVED AFTER the viewer is opened
+# rm -rf "$SIM_DIR/xsim.dir"
+# rm -f "$SIM_DIR/xelab.*"
+# rm -f "$SIM_DIR/xvlog.*"
+# rm -f "$SIM_DIR/xsim.*"
+# rm -f "$SIM_DIR"/*.wdb
