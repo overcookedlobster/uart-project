@@ -1,0 +1,37 @@
+[options]
+# SystemVerilog file extensions
+fileExtensions = ["*.sv", "*.svh", "*.v", "*.vh"]
+
+# Parser settings
+[parser]
+# Enable parsing of all relevant constructs
+parseClassProperties = true
+parseCovergroups = true
+parseAssertions = true
+parseConstraints = true
+
+# Type hierarchy settings
+[typeHierarchy]
+enabled = true
+depth = 3
+
+# Include paths for standard libraries and UVM
+[libraries]
+# Add paths to any standard libraries you use
+paths = [
+    # Example UVM path (uncomment and modify as needed)
+    # "/path/to/uvm/src"
+]
+
+# Preprocessor defines
+[defines]
+# Add any necessary defines here
+values = []
+
+# Workspace settings
+[workspace]
+# Library files or packages to include
+libraryFiles = []
+# Files to exclude
+excludePatterns = ["**/sim/**", "**/tb/**"]
+      

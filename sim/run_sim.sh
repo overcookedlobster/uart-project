@@ -5,9 +5,13 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
 
 # Configuration variables
-DESIGN_FILE="$PROJECT_ROOT/rtl/uart_tx/baudrate_gen.sv"
-TESTBENCH_FILE="$PROJECT_ROOT/tb/unit_tests/uart_tx/baudrate_gen_tb.sv"
-TB_TOP="baudrate_gen_tb"
+DESIGN_FILES=(
+    "$PROJECT_ROOT/rtl/uart_tx/uart_tx.sv"
+    "$PROJECT_ROOT/rtl/uart_tx/baudrate_gen.sv"
+    # Add more design files as needed
+)
+TESTBENCH_FILE="$PROJECT_ROOT/tb/unit_tests/uart_tx/uart_tx_tb.sv"
+TB_TOP="uart_tx_tb"
 SIM_DIR="$PROJECT_ROOT/sim"
 
 # Color output
@@ -17,14 +21,16 @@ YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 echo -e "${YELLOW}Starting Vivado XSim directly...${NC}"
-echo -e "Design file: $DESIGN_FILE"
+echo -e "Design files: ${DESIGN_FILES[*]}"
 echo -e "Testbench file: $TESTBENCH_FILE"
 
 # Check if the files exist
-if [ ! -f "$DESIGN_FILE" ]; then
-    echo -e "${RED}Error: Design file not found: $DESIGN_FILE${NC}"
-    exit 1
-fi
+for DESIGN_FILE in "${DESIGN_FILES[@]}"; do
+    if [ ! -f "$DESIGN_FILE" ]; then
+        echo -e "${RED}Error: Design file not found: $DESIGN_FILE${NC}"
+        exit 1
+    fi
+done
 
 if [ ! -f "$TESTBENCH_FILE" ]; then
     echo -e "${RED}Error: Testbench file not found: $TESTBENCH_FILE${NC}"
@@ -45,7 +51,7 @@ cd "$SIM_DIR"
 
 # Compile the design and testbench (SystemVerilog)
 echo -e "${YELLOW}Compiling files...${NC}"
-xvlog -sv "$DESIGN_FILE" "$TESTBENCH_FILE"
+xvlog -sv "${DESIGN_FILES[@]}" "$TESTBENCH_FILE"
 if [ $? -ne 0 ]; then
     echo -e "${RED}Compilation failed${NC}"
     exit 1
